@@ -41,18 +41,18 @@ if($hash = Utility::getRevHash()) {
                 ],
             ]);
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
             if (Yii::$app->user->isGuest) {
+                $menuItems[] = ['label' => 'About', 'url' => ['/site/about']];
+                $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
                 $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
             } else {
+                $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/site/profile']];
                 $menuItems[] = ['label' => 'Check-In', 'url' => ['/checkin/index']];
                 $menuItems[] = ['label' => 'Past Check-Ins', 'url' => ['/checkin/view']];
+                $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
                 $menuItems[] = ['label' => 'Statistics', 'url' => ['/checkin/report']];
-                $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/site/profile']];
                 $menuItems[] = [
                     'label' => 'Logout',
                     'url' => ['/site/logout'],
