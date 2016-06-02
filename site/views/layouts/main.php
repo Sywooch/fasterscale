@@ -1,18 +1,20 @@
 <?php
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use site\assets\AppAsset;
-use site\widgets\Alert;
-use common\components\Utility;
 
 /**
  * @var \yii\web\View $this
  * @var string $content
  */
-AppAsset::register($this);
+
+use yii\helpers\Url;
+use common\components\Utility;
+
+use macgyer\yii2materializecss\lib\Html;
+use macgyer\yii2materializecss\widgets\Nav;
+use macgyer\yii2materializecss\widgets\NavBar;
+use macgyer\yii2materializecss\widgets\Breadcrumbs;
+use macgyer\yii2materializecss\widgets\Alert;
+
+site\assets\AppAsset::register($this);
 
 if($hash = Utility::getRevHash()) {
   $rev_link = '<a href="'.Utility::getGithubRevUrl().'">'.Utility::getRevHash().'</a>';
@@ -20,24 +22,28 @@ if($hash = Utility::getRevHash()) {
 
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
+
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
+
+    <body>
     <?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
+
+        <header class="page-header">
+            <?php
             NavBar::begin([
                 'brandLabel' => 'The Faster Scale App',
                 'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                'fixed' => true,
+                'wrapperOptions' => [
+                    'class' => 'container',
                 ],
             ]);
             $menuItems = [
@@ -59,47 +65,49 @@ if($hash = Utility::getRevHash()) {
                     'linkOptions' => ['data-method' => 'post']
                 ];
             }
+
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'right'],
                 'items' => $menuItems,
             ]);
+
             NavBar::end();
-        ?>
+            ?>
+        </header>
 
-        <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <p class="pull-left">&copy; <a href="https://corwatts.com">Corey Watts</a> <?= date('Y') ?> | <a href="<?=Url::to(['site/privacy'])?>">Privacy</a> | <a href="<?=Url::to(['site/terms'])?>">Terms</a></p>
+        <main class="content">
+            <div class="container">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
             </div>
-            <div class="col-md-6">
-              <p class="pull-right">FSA rev. <?=$rev_link?> is powered by <a href="http://yiiframework.com">Yii</a>, written in <a href="http://www.vim.org">Vim</a></p>
+        </main>
+
+        <footer class="footer page-footer">
+            <div class="container">
+              <div class="row">
+                <div class="col offset-6 s4">
+                  <h5 class="grey-text text-lighten-3">Links</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col l6 s12">
+                  <p class="grey-text text-lighten-3">&copy; <a class="grey-text text-lighten-3" href="https://corwatts.com">Corey Watts</a> <?= date('Y') ?></p>
+                  <p class="grey-text text-lighten-3">FSA rev. <?=$rev_link?> is powered by <a href="http://yiiframework.com">Yii</a>, written in <a href="http://www.vim.org">Vim</a></p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                  <ul>
+                    <li><a class="grey-text text-lighten-3" href="<?=Url::to(['site/privacy'])?>">Privacy</a></li>
+                    <li><a class="grey-text text-lighten-3" href="<?=Url::to(['site/terms'])?>">Terms</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-    </footer>
-
-    <script type='text/javascript'>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-56659433-1', 'auto');
-	ga('create', 'UA-56659433-1', {'siteSpeedSampleRate': 100});
-        ga('send', 'pageview')
-    </script>
+        </footer>
 
     <?php $this->endBody() ?>
-</body>
-</html>
+    </body>
+    </html>
 <?php $this->endPage() ?>

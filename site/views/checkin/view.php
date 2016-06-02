@@ -6,11 +6,14 @@ use yii\bootstrap\Button;
 use common\models\User;
 use common\models\Question;
 use common\components\Time;
+use macgyer\yii2materializecss\widgets\DatePicker;
 /**
  * @var yii\web\View $this
  */
 
 $this->title = "Past Check-ins";
+
+$this->registerJsFile('/js/checkin/view.js', ['depends' => [\site\assets\AppAsset::className()]]);
 
 function checkboxItemTemplate($index, $label, $name, $checked, $value) {
   $checked_val = ($checked) ? "btn-primary" : "";
@@ -22,25 +25,26 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
   <div class='btn-group' role='group'>
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 week")]); ?>">&lt;&lt;</a> 
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 day")]); ?>">&lt;</a> 
-  </div>
-  <div class='btn-group' role='group'>
-<?= yii\jui\DatePicker::widget([
-  'name' => 'attributeName', 
-  'value' => $utc_date,
-  'options' => ['class'=> 'btn btn-default datepicker', 'readonly' => true],
-  'dateFormat' => 'yyyy-MM-dd', 
-  'clientOptions' => [
-    'defaultDate' => $actual_date,
-    'onSelect' => new \yii\web\JsExpression("function(dateText, obj) { location.href = '/checkin/view/'+dateText; }"),
-    'beforeShowDay' => new \yii\web\JsExpression("function(date) { 
-      var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-      var dates = ".json_encode($past_checkin_dates).";
-      return [ dates.indexOf(string) > -1 ];
-                }")
-              ]
-            ]) ?>
-  </div>
-  <div class='btn-group' role='group'>
+    <input type="date" class="datepicker" value="2016-01-01" />
+<?php
+
+//DatePicker::widget([
+  //'name' => 'attributeName', 
+  //'value' => $utc_date,
+  //'options' => ['class'=> 'btn btn-default datepicker'],
+  //'dateFormat' => 'yyyy-MM-dd', 
+  //'clientOptions' => [
+    //'defaultDate' => $actual_date,
+    //'onSelect' => new \yii\web\JsExpression("function(dateText, obj) { location.href = '/checkin/view/'+dateText; }"),
+    //'beforeShowDay' => new \yii\web\JsExpression("function(date) { 
+      //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+      //var dates = ".json_encode($past_checkin_dates).";
+      //return [ dates.indexOf(string) > -1 ];
+                //}")
+              //]
+            //]);
+
+?>
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 day")]); ?>">&gt;</a> 
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 week")]); ?>">&gt;&gt;</a> 
   </div>

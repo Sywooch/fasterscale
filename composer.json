@@ -18,7 +18,8 @@
     "league/csv": "8.0",
     "spacedealer/yii2-loggly": "*",
     "bower-asset/chartjs": "^2.1",
-    "amenadiel/jpgraph": "^3.6"
+    "amenadiel/jpgraph": "^3.6",
+    "macgyer/yii2-materializecss": "^1.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "*",
