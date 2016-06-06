@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use macgyer\yii2materializecss\widgets\form\ActiveForm;
 use yii\captcha\Captcha;
 
 $this->title = 'Profile';
@@ -19,7 +19,7 @@ $timezones = \DateTimeZone::listIdentifiers();
 				'options' => ['validateOnSubmit' => true]
 			]); ?>
         <?= $form->field($profile, 'username') ?>
-        <?= $form->field($profile, 'email', ['inputTemplate' => '<div class="input-group"><span class="input-group-addon">@</span>{input}</div>']); ?>
+        <?= $form->field($profile, 'email'); ?>
         <?= $form->field($profile, 'password')->passwordInput() ?>
 		    <?= $form->field($profile, 'timezone')->dropDownList(array_combine($timezones, $timezones)); ?>
     </div>

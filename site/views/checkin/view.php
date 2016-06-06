@@ -1,12 +1,12 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Button;
 use common\models\User;
 use common\models\Question;
 use common\components\Time;
-use macgyer\yii2materializecss\widgets\DatePicker;
+use macgyer\yii2materializecss\widgets\Button;
+use macgyer\yii2materializecss\widgets\form\ActiveForm;
+use macgyer\yii2materializecss\widgets\form\DatePicker;
 /**
  * @var yii\web\View $this
  */
@@ -19,15 +19,46 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
   $checked_val = ($checked) ? "btn-primary" : "";
   return "<button class='btn btn-default $checked_val' data-toggle='button' disabled='disabled' name='$name' value='$value'>$label</button>";
 }
+
+//print "<pre>";
+//var_dump($past_checkin_dates);
+//print "</pre>";
+//exit();
 ?>
 <h1>View Past Check-ins</h1>
 <div id='past-checkin-nav' role='toolbar' class='btn-toolbar'>
   <div class='btn-group' role='group'>
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 week")]); ?>">&lt;&lt;</a> 
+  </div>
+  <div class="col m2">
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 day")]); ?>">&lt;</a> 
-    <input type="date" class="datepicker" value="2016-01-01" />
+  </div>
+  <div class="col s4">
+<input type='text' class='datepicker' />
 <?php
 
+//print_r($past_checkin_dates);
+//exit();
+
+//print json_encode([true] + $past_checkin_dates);
+//exit();
+//
+$enabled_dates = [true] + $past_checkin_dates;
+
+echo DatePicker::widget([
+  'name' => 'datepicker',
+  'value' => $actual_date,
+  'options' => [
+    'name' => 'datepicker',
+    'readonly' => true,
+  ],
+  'clientOptions' => [
+    'close' => "Select",
+    'max' => 'now',
+    //'disable' => $enabled_dates,
+    'format' => 'yyyy-mm-dd',
+  ]
+]);
 //DatePicker::widget([
   //'name' => 'attributeName', 
   //'value' => $utc_date,
@@ -45,7 +76,11 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
             //]);
 
 ?>
-    <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 day")]); ?>">&gt;</a> 
+  </div>
+  <div class="col m2">
+    <a class="waves-effect waves-light btn" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 day")]); ?>">&gt;</a> 
+  </div>
+  <div class="col m2">
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 week")]); ?>">&gt;&gt;</a> 
   </div>
 </div>
