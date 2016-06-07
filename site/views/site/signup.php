@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use macgyer\yii2materializecss\widgets\form\ActiveForm;
 use yii\captcha\Captcha;
 
 /**
@@ -20,24 +20,38 @@ $this->registerMetaTag([
   <h1>Signup</h1>
   <p>Please fill out the following fields to signup:</p>
 
-  <div class="row">
-    <div class="col-lg-5">
 			<?php $form = ActiveForm::begin([
 				'id' => 'form-signup',
 				'enableClientValidation' => true,
     'enableAjaxValidation' => false,
 				'options' => ['validateOnSubmit' => true]
 			]); ?>
+  <div class="row">
+    <div class="col l6">
         <?= $form->field($model, 'username') ?>
-        <?= $form->field($model, 'email', ['inputTemplate' => '<div class="input-group"><span class="input-group-addon">@</span>{input}</div>'])->input('email') ?>
+    </div>
+    <div class="col l6">
+        <?= $form->field($model, 'email')->input('email') ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l6">
         <?= $form->field($model, 'password') ?>
+    </div>
+    <div class="col l6">
         <?= $form->field($model, 'timezone')->dropDownList(array_combine($timezones, $timezones)); ?>
-        <?= $form->field($model, 'captcha')->widget(Captcha::className(), [
-          'template' => '<div class="row"><div class="col-md-5">{image}</div><div class="col-md-6 col-md-offset-1">{input}</div></div>',
-        ]) ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l6">
+        <?= $form->field($model, 'captcha')->widget(Captcha::className()) ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col l6">
         <?= $form->field($model, 'send_email')->checkbox() ?>
         <div id='email_threshold_fields' <?php if(!$model->send_email) { ?>style="display: none;"<?php } ?>>
-          <?= $form->field($model, 'email_threshold', ['template' => '{label}<div class="row"><div class="col-md-2">{input}</div><div class="col-md-10"><p class="bg-info text-center" style="margin: 5px 0px;">We recommend a score of 60 to start out with</p></div></div>{error}'])->textInput(['class'=>'form-control'])->input('number', ['min' => 0, 'max' => 1000]) ?>
+          <?= $form->field($model, 'email_threshold')->textInput(['class'=>'form-control'])->input('number', ['min' => 0, 'max' => 1000]) ?>
           <?= $form->field($model, 'partner_email1')->input('email')->input('email') ?>
           <?= $form->field($model, 'partner_email2')->input('email')->input('email') ?>
           <?= $form->field($model, 'partner_email3')->input('email')->input('email') ?>

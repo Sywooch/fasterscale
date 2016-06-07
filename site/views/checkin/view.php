@@ -34,7 +34,6 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
     <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 day")]); ?>">&lt;</a> 
   </div>
   <div class="col s4">
-<input type='text' class='datepicker' />
 <?php
 
 //print_r($past_checkin_dates);

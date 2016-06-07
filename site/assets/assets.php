@@ -16,7 +16,6 @@ return [
     'bundles' => [
         'site\assets\AppAsset',
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
         'site\assets\JuiAsset',
     ],
     // Asset bundle for compression output:
