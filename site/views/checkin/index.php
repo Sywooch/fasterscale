@@ -7,6 +7,7 @@ use yii\bootstrap\Button;
  */
 
 $this->title = "Check-In";
+$this->params['breadcrumbs'][] = $this->title;
 
 function checkboxItemTemplate($index, $label, $name, $checked, $value) {
   return Html::checkbox

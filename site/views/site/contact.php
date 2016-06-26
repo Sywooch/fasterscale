@@ -20,23 +20,29 @@ $this->registerMetaTag([
   <p>Thanks for using this tool! If you have any comments, questions, or feedback please drop us a message using this form. Thanks!</p>
   
   <div class="row">
-    <div class="col-lg-5">
-      <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-        <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'email')->input('email') ?>
-        <?= $form->field($model, 'subject') ?>
-        <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+    <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+    <div class="col s12 m6">
+      <?= $form->field($model, 'name') ?>
+    </div>
+    <div class="col s12 m6">
+      <?= $form->field($model, 'email')->input('email') ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <?= $form->field($model, 'subject') ?>
+      <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
 
-        <?php if(Yii::$app->user->isGuest) {
-          // only show captcha if user is not logged in
-          print $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-            'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-          ]);
-        } ?>
+      <?php if(Yii::$app->user->isGuest) {
+        // only show captcha if user is not logged in
+        print $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+          'template' => '<div class="row"><div class="col s3">{image}</div><div class="col s6">{input}</div></div>',
+        ]);
+      } ?>
 
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-        </div>
+      <div class="form-group">
+          <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+      </div>
       <?php ActiveForm::end(); ?>
     </div>
   </div>

@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
  */
 
 $this->title = "Check-In | Questions";
+$this->params['breadcrumbs'][] = 'Check-in';
+$this->params['breadcrumbs'][] = 'Questions';
 
 function radioItemTemplate($index, $label, $name, $checked, $value) {
   return Html::radio
