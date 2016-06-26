@@ -80,7 +80,9 @@ if($hash = Utility::getRevHash()) {
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]) ?>
+
                 <?= Alert::widget() ?>
+
                 <?= $content ?>
             </div>
         </main>
@@ -95,7 +97,6 @@ if($hash = Utility::getRevHash()) {
               <div class="row">
                 <div class="col l6 s12">
                   <p class="grey-text text-lighten-3">&copy; <a class="grey-text text-lighten-3" href="https://corwatts.com">Corey Watts</a> <?= date('Y') ?></p>
-                  <p class="grey-text text-lighten-3">FSA rev. <?=$rev_link?> is powered by <a href="http://yiiframework.com">Yii</a>, written in <a href="http://www.vim.org">Vim</a></p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                   <ul>
