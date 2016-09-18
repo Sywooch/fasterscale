@@ -1,9 +1,9 @@
 <?php
-use yii\helpers\Html;
 use yii\helpers\Url;
 use common\models\User;
 use common\models\Question;
 use common\components\Time;
+use macgyer\yii2materializecss\lib\Html;
 use macgyer\yii2materializecss\widgets\Button;
 use macgyer\yii2materializecss\widgets\form\ActiveForm;
 use macgyer\yii2materializecss\widgets\form\DatePicker;
@@ -19,11 +19,6 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
   $checked_val = ($checked) ? "" : "btn-disabled";
   return "<button class='btn btn-flat $checked_val' data-toggle='button' disabled='disabled' name='$name' value='$value'>$label</button>";
 }
-
-//print "<pre>";
-//var_dump($past_checkin_dates);
-//print "</pre>";
-//exit();
 ?>
 <h1>View Past Check-ins</h1>
 <div id='past-checkin-nav' role='toolbar' class='btn-toolbar container'>

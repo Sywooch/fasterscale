@@ -1,7 +1,7 @@
 <?php
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Button;
+use macgyer\yii2materializecss\lib\Html;
+use macgyer\yii2materializecss\widgets\Button;
+use macgyer\yii2materializecss\widgets\form\ActiveForm;
 /**
  * @var yii\web\View $this
  */
@@ -20,7 +20,7 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
         'container' => false,
         'labelOptions' =>
         [
-          'class' => $checked ? 'btn btn-default active' : 'btn btn-default',
+          'class' => $checked ? '' : '',
         ],
       ]
     );
@@ -31,12 +31,20 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
 <?php
 $form = ActiveForm::begin([
   'id' => 'checkin-form',
-  'options' => ['class' => 'form-horizontal'],
 ]);
 
+// THIS IS A HACK UNTIL yii2-materializecss SUPPORTS CHECKBOXES
 foreach($categories as $category) {
-  print $form->field($model, "options{$category['id']}")->checkboxList($optionsList[$category['id']], ['data-toggle' => 'buttons', 'item' => "checkboxItemTemplate"]);
+  print "<div class='row'>";
+  foreach($optionsList[$category['id']] as $option_id => $option) {
+    print "<span class='checkbox-item'>";
+    print "<input type='checkbox' class='' id='{$category['id']}-$option_id' name='CheckinForm[options{$category['id']}][]' value=$option_id >";
+    print "<label for='{$category['id']}-$option_id'>$option</label>";
+    print "</span>";
+  }
+print "</div>";
 }
+
 print Html::submitButton('Submit', ['class' => 'btn btn-success']); 
 ActiveForm::end();
 ?>
