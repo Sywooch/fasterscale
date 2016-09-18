@@ -29,7 +29,6 @@ class AppAsset extends AssetBundle
         'site\assets\JuiAsset',
         'macgyer\yii2materializecss\assets\MaterializeAsset',
         'macgyer\yii2materializecss\assets\MaterializePluginAsset',
-        'site\assets\MomentAsset',
         'site\assets\ChartjsAsset',
     ];
 }
