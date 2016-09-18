@@ -16,8 +16,8 @@ $this->title = "Past Check-ins";
 $this->registerJsFile('/js/checkin/view.js', ['depends' => [\site\assets\AppAsset::className()]]);
 
 function checkboxItemTemplate($index, $label, $name, $checked, $value) {
-  $checked_val = ($checked) ? "btn-primary" : "";
-  return "<button class='btn btn-default $checked_val' data-toggle='button' disabled='disabled' name='$name' value='$value'>$label</button>";
+  $checked_val = ($checked) ? "" : "btn-disabled";
+  return "<button class='btn btn-flat $checked_val' data-toggle='button' disabled='disabled' name='$name' value='$value'>$label</button>";
 }
 
 //print "<pre>";
@@ -26,61 +26,38 @@ function checkboxItemTemplate($index, $label, $name, $checked, $value) {
 //exit();
 ?>
 <h1>View Past Check-ins</h1>
-<div id='past-checkin-nav' role='toolbar' class='btn-toolbar'>
-  <div class='btn-group' role='group'>
-    <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 week")]); ?>">&lt;&lt;</a> 
-  </div>
-  <div class="col m2">
-    <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 day")]); ?>">&lt;</a> 
-  </div>
-  <div class="col s4">
+<div id='past-checkin-nav' role='toolbar' class='btn-toolbar container'>
+  <div class="row">
+    <div class="col s4 center-align">
+      <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 week")]); ?>">&lt;&lt;</a> 
+      <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "-1 day")]); ?>">&lt;</a> 
+    </div>
+    <div class="col s4 center-align">
 <?php
-
-//print_r($past_checkin_dates);
-//exit();
-
-//print json_encode([true] + $past_checkin_dates);
-//exit();
-//
 $enabled_dates = [true] + $past_checkin_dates;
-
 echo DatePicker::widget([
   'name' => 'datepicker',
   'value' => $actual_date,
   'options' => [
     'name' => 'datepicker',
+    'class' => 'center-align',
     'readonly' => true,
   ],
   'clientOptions' => [
     'close' => "Select",
     'max' => 'now',
-    //'disable' => $enabled_dates,
+    'disable' => $enabled_dates,
     'format' => 'yyyy-mm-dd',
+    'formatSubmit' => 'yyyy-mm-dd',
+    'onClose' => new \yii\web\JsExpression("function() { location.href = '/checkin/view/'+this.get(); }"),
   ]
 ]);
-//DatePicker::widget([
-  //'name' => 'attributeName', 
-  //'value' => $utc_date,
-  //'options' => ['class'=> 'btn btn-default datepicker'],
-  //'dateFormat' => 'yyyy-MM-dd', 
-  //'clientOptions' => [
-    //'defaultDate' => $actual_date,
-    //'onSelect' => new \yii\web\JsExpression("function(dateText, obj) { location.href = '/checkin/view/'+dateText; }"),
-    //'beforeShowDay' => new \yii\web\JsExpression("function(date) { 
-      //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-      //var dates = ".json_encode($past_checkin_dates).";
-      //return [ dates.indexOf(string) > -1 ];
-                //}")
-              //]
-            //]);
-
 ?>
-  </div>
-  <div class="col m2">
-    <a class="waves-effect waves-light btn" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 day")]); ?>">&gt;</a> 
-  </div>
-  <div class="col m2">
-    <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 week")]); ?>">&gt;&gt;</a> 
+    </div>
+    <div class="col s4 center-align">
+      <a class="waves-effect waves-light btn" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 day")]); ?>">&gt;</a> 
+      <a class="btn btn-default" href="<?= Url::toRoute(['checkin/view', 'date'=>Time::alterLocalDate($actual_date, "+1 week")]); ?>">&gt;&gt;</a> 
+    </div>
   </div>
 </div>
 

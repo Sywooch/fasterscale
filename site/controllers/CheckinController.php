@@ -108,8 +108,7 @@ class CheckinController extends \yii\web\Controller
     if(is_null($date))
       $date = Time::getLocalDate();
 
-    $as_array = true;
-    $past_checkin_dates = UserOption::getPastCheckinDates($as_array);
+    $past_checkin_dates = UserOption::getPastCheckinDates(true, true);
     $questions = User::getUserQuestions($date);
     $user_options = User::getUserOptions($date);
 
