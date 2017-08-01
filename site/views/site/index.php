@@ -19,12 +19,22 @@ $this->registerJsFile('/js/site/index.js', ['depends' => [\site\assets\AppAsset:
 
   <div class="body-content">
     <div class="row block">
+      <div class="col-md-12">
+        <p>Relapse is not an event that suddenly occurs. By using Michael Dye's "The Faster Scale", a person can notice their pattern of biological, psychological, and social changes that lead to relapse.</p>
+        <p>Once identified, evasive action can be taken.</p>
+      </div>
+    </div>
+    <div class="row block">
+      <div class="col-md-6">
+        <p>This is an online version of The Faster Scale.</p>
+      </div>
       <div class="col-md-4">
         <canvas id='example-scores-line-chart'></canvas>
       </div>
-      <div class="col-md-8">
-        <p>Contrary to what many addicts might believe, relapse is not an event that occurs suddenly. There is sequential pattern of biological, psychological, and social changes that lead to relapse.</p>
-        <p>By using Michael Dye's popular and proven relapse prevention tool "The Faster Scale", a person can train themselves to notice these warning signs before relapse occurs and take evasive action. Log the emotions and behaviors you are exhibiting in order to see how vulnerable to temptation you are in the moment. Do a check-in every day to see how your mental state changes over time.</p>
+    </div>
+    <div class="row block">
+      <div class="col-md-12">
+        <p>Log the emotions and behaviors you are exhibiting in order to see how vulnerable to temptation you are in the moment. Do a check-in every day to see how your mental state changes over time.</p>
         <p>More questions? Take a look at our <?=Html::a("FAQ", Url::to(['site/faq']))?>.</p>
       </div>
     </div>

@@ -69,8 +69,12 @@ if($hash = Utility::getRevHash()) {
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <?= Alert::widget() ?>
+              <?= $content ?>
+            </div>
+          </div>
         </div>
     </div>
 
