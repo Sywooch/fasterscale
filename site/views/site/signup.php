@@ -20,7 +20,7 @@ $this->registerJsFile('/js/site/signup.js', ['depends' => [\site\assets\AppAsset
 <div class="site-signup">
   <h1>Signup</h1>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
 			<?php $form = ActiveForm::begin([
 				'id' => 'form-signup',
 				'enableClientValidation' => true,
