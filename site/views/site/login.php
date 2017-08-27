@@ -7,10 +7,11 @@ use yii\widgets\ActiveForm;
  * @var yii\widgets\ActiveForm $form
  * @var \common\models\LoginForm $model
  */
-$this->title = 'The Faster Scale App | Login';
+$this->title = 'The Faster Scale App | Log in';
 ?>
 <div class="site-login">
-  <h1>Login</h1>
+  <h1>Log in</h1>
+
   <div class="row">
     <div class="col-md-7">
       <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
@@ -21,7 +22,7 @@ $this->title = 'The Faster Scale App | Login';
           If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
         </div>
         <div class="form-group">
-          <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+          <?= Html::submitButton('Log in', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
       <?php ActiveForm::end(); ?>
     </div>
