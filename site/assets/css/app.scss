@@ -2,11 +2,11 @@
  * We can override Bootstrap variables here
  * $body-bg: lightgray;
  */
+$font-size-base: 16px !default;
 
 html,
 body {
 	height: 100%;
-  font-size: 16px;
 }
 
 p {
